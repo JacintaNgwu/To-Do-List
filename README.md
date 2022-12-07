@@ -83,7 +83,7 @@ To run tests, run the following command:
 
 <!-- AUTHORS -->
 
-## 👥 Authors <a name="authors"></a>
+## 👥 Author <a name="author"></a>
 
 👤 **Jacinta Ngwu**
 
