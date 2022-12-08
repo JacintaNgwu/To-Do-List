@@ -2,10 +2,11 @@ import './style/index.css';
 import { addToDoList } from './modules/addToDo.js';
 import { Mytask } from './modules/myTask.js';
 
-import { tasks } from './modules/globalVariables.js';
+import { tasks, toDoList } from './modules/globalVariables.js';
 
 const textinput = document.querySelector('#input');
 const enterIcon = document.querySelector('#input');
+const clearBtn = document.querySelector('.clear');
 textinput.addEventListener('keypress', (e) => {
   if (e.key === 'Enter') {
     e.preventDefault();
@@ -16,7 +17,6 @@ textinput.addEventListener('keypress', (e) => {
     tasks.push(newToDo);
     localStorage.setItem('tasks', JSON.stringify(tasks));
     textinput.value = null;
-    // console.log(newToDo);
   }
 });
 
@@ -34,4 +34,16 @@ enterIcon.addEventListener('click', () => {
 
 tasks.forEach((element) => {
   addToDoList(element);
+});
+
+clearBtn.addEventListener('click', () => {
+  toDoList.innerHTML = '';
+  const newtasks = tasks.filter((task) => task.completed === true);
+  newtasks.forEach((element) => {
+    tasks.splice(tasks.indexOf(element), 1);
+  });
+  localStorage.setItem('tasks', JSON.stringify(tasks));
+  tasks.forEach((element) => {
+    addToDoList(element);
+  });
 });

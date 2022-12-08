@@ -2,6 +2,7 @@
 import { deleteItem } from './addRemove.js';
 import { edit } from './edit.js';
 import { toDoList } from './globalVariables.js';
+import { completedTask, checkCompletedTask } from './interactiveList.js';
 
 const addToDoList = (todoValue) => {
   toDoList.innerHTML += `
@@ -15,6 +16,7 @@ const addToDoList = (todoValue) => {
 
   const editIcon = Array.from(document.querySelectorAll('.icon'));
   const deleteIcon = Array.from(document.querySelectorAll('.icon'));
+  const checkBox = Array.from(document.querySelectorAll('.checkbox'));
 
   editIcon.forEach((icon) => {
     icon.addEventListener('click', () => {
@@ -27,6 +29,14 @@ const addToDoList = (todoValue) => {
     icon.addEventListener('click', () => {
       const currentListItem = icon.closest('.list-item');
       deleteItem(currentListItem);
+    });
+  });
+
+  checkBox.forEach((check) => {
+    const currentListItem = check.closest('.list-item');
+    checkCompletedTask(check, currentListItem);
+    check.addEventListener('change', (event) => {
+      completedTask(currentListItem, event);
     });
   });
 };
